@@ -19,4 +19,16 @@ export default class CarModel extends AbstractODM<ICar> {
   public async create(entity: Omit<ICar, 'id'>) {
     return this.model.create(entity);
   }
+
+  public async findOne() {
+    return this.model.findOne();
+  }
+
+  public async findAll() {
+    return this.model.find();
+  }
+
+  public async findByID(id: string) {
+    return this.model.findById(id);
+  }
 }

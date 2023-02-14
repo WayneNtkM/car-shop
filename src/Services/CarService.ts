@@ -1,6 +1,8 @@
+import { isValidObjectId } from 'mongoose';
 import Car from '../Domains/Car';
 import ICar from '../Interfaces/ICar';
 import CarODM from '../Models/CarModel';
+import ErrorFactory from '../utils/ErrorFactory';
 
 export default class CarService {
   private model;
@@ -8,8 +10,23 @@ export default class CarService {
     this.model = new CarODM();
   }
 
+  public async findById(id: string): Promise<Car> {
+    if (!isValidObjectId(id)) throw new ErrorFactory(422, 'Invalid mongo id');
+
+    const data = await this.model.findByID(id);
+    if (!data) {
+      throw new ErrorFactory(404, 'Car not found');
+    }
+    return new Car(data);
+  }
+
   public async registerCar(entity: Omit<ICar, 'id'>): Promise<Car> {
     const data = await this.model.create(entity);
     return new Car(data);
+  }
+
+  public async findAllCars(): Promise<Car[]> {
+    const data = await this.model.findAll();
+    return data.map((e) => new Car(e));
   }
 }
