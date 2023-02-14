@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import { Model } from 'mongoose';
 import { afterEach } from 'mocha';
 import CarService from '../../../src/Services/CarService';
-import newCar, { cars, newCarResponse } from '../../integration/mocks/CarMocks';
+import newCar, { cars, newCarResponse, updateCar, updatedCar } from '../mocks/CarMocks';
 
 describe('Unit test for service layer', function () {
   afterEach(sinon.restore);
@@ -62,5 +62,16 @@ describe('Unit test for service layer', function () {
     } catch (error) {
       expect((error as unknown as Error).message).to.be.equal('Car not found');
     }
+  });
+  it('Should update', async function () {
+    sinon.stub(Model, 'updateOne')
+      .resolves();
+    sinon.stub(Model, 'findById').resolves(updateCar);
+    
+    const id = '634852326b35b59438fbea2f';
+
+    const service = new CarService();
+    const motorcycle = await service.updateCar(id, updateCar);
+    expect(motorcycle).to.be.deep.equal(updatedCar);
   });
 });
