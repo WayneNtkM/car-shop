@@ -37,4 +37,10 @@ export default class CarService {
 
     return new Car(data);
   }
+
+  public async deleteCar(id: string) {
+    await this.findById(id);
+
+    return this.model.deleteCar(id);
+  }
 }
