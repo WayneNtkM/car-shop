@@ -29,4 +29,12 @@ export default class CarService {
     const data = await this.model.findAll();
     return data.map((e) => new Car(e));
   }
+
+  public async updateCar(id: string, obj: ICar): Promise<Car> {
+    await this.findById(id);
+
+    const data = await this.model.update(id, obj) as ICar;
+
+    return new Car(data);
+  }
 }
