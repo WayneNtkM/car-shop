@@ -75,4 +75,14 @@ describe('Unit test for service layer', function () {
     const motorcycle = await service.updateMotorcycle(id, updateMotorcycle);
     expect(motorcycle).to.be.deep.equal(updatedMotorcycle);
   });
+  it('Should delete', async function () {
+    sinon.stub(Model, 'deleteOne')
+      .resolves();
+    sinon.stub(Model, 'findById').resolves(newMotorcycle);
+    
+    const id = '6348513f34c397abcad040b2';
+
+    const service = new MotorcycleService();
+    await service.deleteMotorcycle(id);
+  });
 });
