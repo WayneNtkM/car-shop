@@ -18,7 +18,7 @@ export default class MotorcycleController {
   public async registerNewCar() {
     const newBike = this.req.body;
     try {
-      const data = await this.service.registerCar(newBike);
+      const data = await this.service.registerMotorcycle(newBike);
       return this.res.status(201).json(data);
     } catch (error) {
       this.next(error);
@@ -27,7 +27,7 @@ export default class MotorcycleController {
 
   public async findAllCars() {
     try {
-      const motorcycle = await this.service.findAllCars();
+      const motorcycle = await this.service.findAllMotorcycles();
       return this.res.status(200).json(motorcycle);
     } catch (error) {
       throw new ErrorFactory(500, 'Internal server error');
@@ -48,7 +48,7 @@ export default class MotorcycleController {
     const { id } = this.req.params;
     const { body } = this.req;
     try {
-      const motorcycle = await this.service.updateCar(id, body);
+      const motorcycle = await this.service.updateMotorcycle(id, body);
       return this.res.status(200).json(motorcycle);
     } catch (error) {
       this.next(error);

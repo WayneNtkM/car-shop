@@ -20,17 +20,17 @@ export default class MotorcycleService {
     return new Motorcycle(data);
   }
 
-  public async registerCar(entity: Omit<IMotorcycle, 'id'>): Promise<Motorcycle> {
+  public async registerMotorcycle(entity: Omit<IMotorcycle, 'id'>): Promise<Motorcycle> {
     const data = await this.model.create(entity);
     return new Motorcycle(data);
   }
 
-  public async findAllCars(): Promise<Motorcycle[]> {
+  public async findAllMotorcycles(): Promise<Motorcycle[]> {
     const data = await this.model.findAll();
     return data.map((e) => new Motorcycle(e));
   }
 
-  public async updateCar(id: string, obj: IMotorcycle): Promise<Motorcycle> {
+  public async updateMotorcycle(id: string, obj: IMotorcycle): Promise<Motorcycle> {
     await this.findById(id);
 
     const data = await this.model.update(id, obj) as IMotorcycle;
