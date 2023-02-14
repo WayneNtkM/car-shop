@@ -66,12 +66,22 @@ describe('Unit test for service layer', function () {
   it('Should update', async function () {
     sinon.stub(Model, 'updateOne')
       .resolves();
-    sinon.stub(Model, 'findById').resolves(updateCar);
+    sinon.stub(Model, 'findById').resolves(updatedCar);
     
     const id = '634852326b35b59438fbea2f';
 
     const service = new CarService();
-    const motorcycle = await service.updateCar(id, updateCar);
-    expect(motorcycle).to.be.deep.equal(updatedCar);
+    const car = await service.updateCar(id, updateCar);
+    expect(car).to.be.deep.equal(updatedCar);
+  });
+  it('Should delete', async function () {
+    sinon.stub(Model, 'deleteOne')
+      .resolves();
+    sinon.stub(Model, 'findById').resolves(newCarResponse);
+    
+    const id = '6348513f34c397abcad040b2';
+
+    const service = new CarService();
+    await service.deleteCar(id);
   });
 });
