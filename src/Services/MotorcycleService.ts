@@ -37,4 +37,10 @@ export default class MotorcycleService {
 
     return new Motorcycle(data);
   }
+
+  public async deleteMotorcycle(id: string) {
+    await this.findById(id);
+
+    return this.model.deleteMotorcycle(id);
+  }
 }
