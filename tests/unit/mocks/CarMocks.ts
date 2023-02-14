@@ -19,6 +19,27 @@ export const newCarResponse = {
   seatsQty: 5,
 };
 
+export const updateCar = {
+  model: 'Marea',
+  year: 1992,
+  color: 'Red',
+  status: true,
+  buyValue: 12.000,
+  doorsQty: 2,
+  seatsQty: 5,
+};
+
+export const updatedCar = {
+  id: '634852326b35b59438fbea2f',
+  model: 'Marea',
+  year: 1992,
+  color: 'Red',
+  status: true,
+  buyValue: 12.000,
+  doorsQty: 2,
+  seatsQty: 5,
+};
+
 export const cars = [
   {
     id: '634852326b35b59438fbea2f',
